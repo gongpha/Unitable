@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scene/element/block_subject.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.141176, 0.172549, 0.117647, 1 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.878431, 0.870588, 0.454902, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.252441, 0.252441, 0.0420736, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 2.0
+content_margin_right = 2.0
+bg_color = Color( 1, 0, 0.501961, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+content_margin_left = 2.0
+content_margin_right = 2.0
+bg_color = Color( 1, 0.988235, 0.313726, 1 )
+
+[node name="block" type="Panel"]
+margin_right = 128.0
+margin_bottom = 64.0
+mouse_default_cursor_shape = 2
+script = ExtResource( 1 )
+panel_normal = SubResource( 2 )
+panel_hover = SubResource( 1 )
+tcolor_normal = Color( 1, 1, 1, 1 )
+tag_lec = Color( 0, 0.501961, 1, 1 )
+tag_pra = Color( 1, 0.501961, 0, 1 )
+
+[node name="name" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+text = "@@@"
+align = 1
+autowrap = true
+
+[node name="section" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/normal = SubResource( 3 )
+text = "#"
+align = 1
+
+[node name="place" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/normal = SubResource( 4 )
+text = "@@@"
+align = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_block_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_block_mouse_exited"]

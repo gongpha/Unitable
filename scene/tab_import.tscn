@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scene/tab_import.gd" type="Script" id=1]
+[ext_resource path="res://resource/font/fnt_mono.tres" type="DynamicFont" id=2]
+
+[node name="นำเข้า" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -10.0
+margin_bottom = -40.0
+script = ExtResource( 1 )
+
+[node name="hbox" type="HBoxContainer" parent="."]
+margin_right = 1270.0
+margin_bottom = 20.0
+
+[node name="import" type="Button" parent="hbox"]
+margin_right = 12.0
+margin_bottom = 20.0
+text = "นำเข้า"
+
+[node name="what" type="OptionButton" parent="hbox"]
+margin_left = 16.0
+margin_right = 146.0
+margin_bottom = 20.0
+text = "KMITL (new.reg)"
+items = [ "KMITL (new.reg)", null, false, 0, null ]
+selected = 0
+
+[node name="code" type="TextEdit" parent="."]
+margin_top = 24.0
+margin_right = 1270.0
+margin_bottom = 680.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+show_line_numbers = true
+draw_tabs = true
+draw_spaces = true
+wrap_enabled = true
+minimap_draw = true
+
+[connection signal="pressed" from="hbox/import" to="." method="_on_import_pressed"]

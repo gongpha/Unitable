@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scene/element/t_head_body.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxLine" id=2]
+color = Color( 1, 0.988235, 0.313726, 0.12549 )
+grow_begin = 0.0
+grow_end = 0.0
+vertical = true
+
+[sub_resource type="StyleBoxLine" id=3]
+color = Color( 1, 0.988235, 0.313726, 0.501961 )
+grow_begin = 0.0
+grow_end = 0.0
+vertical = true
+
+[node name="0" type="Control"]
+margin_right = 150.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 150, 64 )
+size_flags_vertical = 3
+script = ExtResource( 1 )
+
+[node name="vs" type="VSeparator" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -3.0
+margin_right = 1.0
+grow_horizontal = 2
+custom_styles/separator = SubResource( 2 )
+
+[node name="VS" type="VSeparator" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.0
+margin_right = 3.0
+grow_horizontal = 2
+custom_styles/separator = SubResource( 3 )
+
+[node name="VS2" type="VSeparator" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -151.0
+margin_right = -147.0
+grow_horizontal = 2
+custom_styles/separator = SubResource( 3 )
