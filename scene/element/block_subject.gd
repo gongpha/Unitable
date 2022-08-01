@@ -16,28 +16,29 @@ var sname : Label
 var section : Label
 var place : Label
 
-func setup(sname_ : String, data_ : Dictionary) :
+var added_id : int = -1
+
+signal clicked()
+
+func setup(data_ : Dictionary) :
 	data = data_
 	sname = $name
-	
-	sname.text = sname_
 	section = $section
 	place = $place
 	
-	var SECTION : String = data_.get('section', String())
-	var PLACE : String = data_.get('place', String())
+	refresh()
 	
-	if SECTION.empty() :
-		section.free()
-		section = null
-	else :
-		section.text = SECTION
+func refresh() :
+	var SECTION : String = data.get('section', String())
+	var PLACE : String = data.get('place', String())
 	
-	if PLACE.empty() :
-		place.free()
-		place = null
-	else :
-		place.text = PLACE
+	section.visible = !SECTION.empty()
+	section.text = SECTION
+	
+	sname.text = data.get('subject_name', String())
+	
+	place.visible = !PLACE.empty()
+	place.text = PLACE
 	
 	
 	_on_block_mouse_exited()
@@ -49,7 +50,7 @@ func setup(sname_ : String, data_ : Dictionary) :
 	bstyleb.border_width_left = 2.0
 	bstyleb.border_width_right = 2.0
 	
-	match data_.get('tag') :
+	match data.get('tag') :
 		'ท' :
 			bstyleb.border_color = tag_lec
 		'ป' :
@@ -75,3 +76,9 @@ func _on_block_mouse_exited() :
 	add_stylebox_override('panel', panel_normal)
 	sname.add_color_override('font_color', tcolor_normal)
 	
+
+
+func _on_block_gui_input(event) :
+	if event is InputEventMouseButton :
+		if event.pressed and event.button_index == BUTTON_LEFT :
+			emit_signal("clicked")

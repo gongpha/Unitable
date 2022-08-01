@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scene/element/prop.gd" type="Script" id=1]
+
+[node name="name" type="HBoxContainer"]
+margin_right = 1270.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+
+[node name="n" type="Label" parent="."]
+margin_top = 7.0
+margin_right = 314.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+text = "@@@"
+align = 2
+
+[node name="f" type="LineEdit" parent="."]
+margin_left = 318.0
+margin_right = 633.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+align = 1
+
+[node name="f2" type="LineEdit" parent="."]
+margin_left = 637.0
+margin_right = 951.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+align = 1
+
+[node name="d" type="OptionButton" parent="."]
+margin_left = 955.0
+margin_right = 1270.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+items = [ "จันทร์", null, false, 1, null, "อังคาร", null, false, 2, null, "พุธ", null, false, 3, null, "พฤหัสบดี", null, false, 4, null, "ศุกร์", null, false, 5, null, "เสาร์", null, false, 5, null, "อาทิตย์", null, false, 6, null ]

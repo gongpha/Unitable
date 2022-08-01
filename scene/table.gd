@@ -25,6 +25,9 @@ var blocks : Array
 var dayrows : Array
 var current_time := Vector3(8, 0, 0)
 
+signal blocks_updated()
+signal block_clicked()
+
 func _ready() :
 	call_deferred('imple')
 	
@@ -41,7 +44,7 @@ func imple() :
 		
 		var rownodes : Array
 		
-		for t in 12 :
+		for t in 16 :
 			var T : Control
 			
 			if r == null :
@@ -57,35 +60,58 @@ func imple() :
 		])
 	float_ = Control.new()
 	float_.name = "0"
+	float_.rect_min_size.y = 32
 	table.add_child(float_, true)
-
-func add_blocks(bb : Array) :
-	for b in bb :
-		var block : BlockSubject = b
-		var bdata : Dictionary = b.data
+	
+func _clicked(b) :
+	emit_signal('block_clicked', b)
+	
+func refresh_block(b : BlockSubject) :
+	var bdata : Dictionary = b.data
+	
+	
+	
+	var start : Vector2 = bdata.get('teach_start', Vector2(8, 0))
+	var end : Vector2 = bdata.get('teach_end', Vector2(9, 0))
+	
+	var thatday : Array = dayrows[bdata.get('day', 0) + 1] # +1 for header
+	var timenode : TableHeadBody = thatday[1][int(start.x) - 8]
+	
+	var hourv : Vector2 = end - start
+	var hour : float = hourv.x + (hourv.y / 60.0)
+	
+	if hour == 0.0 :
+		b.free()
+		return
 		
-		var thatday : Array = dayrows[bdata.day + 1] # +1 for header
-		var timenode : TableHeadBody = thatday[1][int(bdata.teach_start.x) - 8]
-		
-		var hourv : Vector2 = bdata.teach_end - bdata.teach_start
-		var hour : float = hourv.x + (hourv.y / 60.0)
-		
-		if hour == 0.0 :
-			b.free()
-			return
-			
-		var arr := [
+	var arr : Array
+	
+	if b.added_id == -1 :
+		arr = [
 			b,
 			timenode,
 			hour
 		]
+	else :
+		arr = blocks[b.added_id]
+		arr[1] = timenode
+		arr[2] = hour
+	
+	if b.added_id == -1 :
+		Real.worldmas_array_push(blocks, arr)
+		b.added_id = blocks.size() - 1
 		
-		_repos(arr)
-		
+	_repos(arr)
+	emit_signal('blocks_updated')
+
+func add_blocks(bb : Array) :
+	for b in bb :
+		b.connect('clicked', self, '_clicked', [b])
 		float_.add_child(b)
-		blocks.append(arr)
+		refresh_block(b)
 		
 	repos_all()
+	emit_signal('blocks_updated')
 
 func _repos(a : Array) :
 	a[0].rect_size.x = a[1].rect_size.x * a[2]
@@ -109,10 +135,12 @@ static func timev_to_int(v : Vector3) -> int :
 
 func _on_draw_draw() :
 	var peak := table.rect_size
+	if float_ :
+		peak.y -= float_.rect_min_size.y
 	
 	var timex : float = lerp(100, peak.x,
 		inverse_lerp(
-			timev_to_int(Vector3(8, 0, 0)), timev_to_int(Vector3(20, 0, 0)),
+			timev_to_int(Vector3(8, 0, 0)), timev_to_int(Vector3(24, 0, 0)),
 			timev_to_int(current_time)
 		)
 	)
@@ -140,3 +168,13 @@ func _physics_process(delta : float) :
 		
 	current_time = v
 	draw.update()
+
+func delete_block(b : BlockSubject) :
+	assert(b.added_id != -1)
+	
+	blocks[b.added_id] = null
+	Real.worldmas_array_optimize(blocks, b.added_id)
+	
+	b.free()
+	
+	emit_signal('blocks_updated')

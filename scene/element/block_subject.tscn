@@ -63,5 +63,6 @@ custom_styles/normal = SubResource( 4 )
 text = "@@@"
 align = 1
 
+[connection signal="gui_input" from="." to="." method="_on_block_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_block_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_block_mouse_exited"]

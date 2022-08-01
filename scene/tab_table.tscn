@@ -1,0 +1,251 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scene/element/prop.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scene/table.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scene/tab_table.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 1, 1, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 0, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 1, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 1, 0.501961, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.654902, 0.290196, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 1, 0, 0, 1 )
+
+[node name="ตาราง" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 3 )
+
+[node name="scroll" type="ScrollContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 608.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_vertical_enabled = false
+
+[node name="table" parent="scroll" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1280.0
+margin_bottom = 608.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="hbox2" type="HBoxContainer" parent="."]
+margin_top = 612.0
+margin_right = 1280.0
+margin_bottom = 636.0
+
+[node name="profile" type="OptionButton" parent="hbox2"]
+margin_right = 256.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 256, 0 )
+size_flags_vertical = 3
+
+[node name="v" type="VSeparator" parent="hbox2"]
+margin_left = 260.0
+margin_right = 264.0
+margin_bottom = 24.0
+
+[node name="total" type="Label" parent="hbox2"]
+margin_left = 268.0
+margin_top = 5.0
+margin_right = 280.0
+margin_bottom = 19.0
+text = "0 หน่วยกิต"
+
+[node name="v2" type="VSeparator" parent="hbox2"]
+margin_left = 284.0
+margin_right = 288.0
+margin_bottom = 24.0
+
+[node name="day_m" type="Label" parent="hbox2"]
+margin_left = 292.0
+margin_right = 324.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 32, 24 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/normal = SubResource( 8 )
+text = "M"
+align = 1
+valign = 1
+
+[node name="day_t" type="Label" parent="hbox2"]
+margin_left = 328.0
+margin_right = 360.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 32, 24 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/normal = SubResource( 2 )
+text = "T"
+align = 1
+valign = 1
+
+[node name="day_w" type="Label" parent="hbox2"]
+margin_left = 364.0
+margin_right = 396.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 32, 24 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/normal = SubResource( 3 )
+text = "W"
+align = 1
+valign = 1
+
+[node name="day_th" type="Label" parent="hbox2"]
+margin_left = 400.0
+margin_right = 432.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 32, 24 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/normal = SubResource( 4 )
+text = "TH"
+align = 1
+valign = 1
+
+[node name="day_f" type="Label" parent="hbox2"]
+margin_left = 436.0
+margin_right = 468.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 32, 24 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/normal = SubResource( 5 )
+text = "F"
+align = 1
+valign = 1
+
+[node name="day_sa" type="Label" parent="hbox2"]
+margin_left = 472.0
+margin_right = 504.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 32, 24 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/normal = SubResource( 6 )
+text = "SA"
+align = 1
+valign = 1
+
+[node name="day_s" type="Label" parent="hbox2"]
+margin_left = 508.0
+margin_right = 540.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 32, 24 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/normal = SubResource( 7 )
+text = "S"
+align = 1
+valign = 1
+
+[node name="v3" type="VSeparator" parent="hbox2"]
+margin_left = 544.0
+margin_right = 548.0
+margin_bottom = 24.0
+
+[node name="add_block" type="Button" parent="hbox2"]
+margin_left = 552.0
+margin_right = 564.0
+margin_bottom = 24.0
+text = "เพิ่มคาบ"
+
+[node name="delete_block" type="Button" parent="hbox2"]
+margin_left = 568.0
+margin_right = 580.0
+margin_bottom = 24.0
+text = "ลบคาบ"
+
+[node name="update_field" type="Button" parent="hbox2"]
+margin_left = 584.0
+margin_right = 596.0
+margin_bottom = 24.0
+text = "แก้ไข"
+
+[node name="hbox" type="HBoxContainer" parent="."]
+margin_top = 640.0
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="vbox" type="VBoxContainer" parent="hbox"]
+margin_right = 539.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="subject_name" parent="hbox/vbox" instance=ExtResource( 1 )]
+margin_right = 539.0
+margin_bottom = 38.0
+fname = "ช่ือวิชา"
+
+[node name="where" parent="hbox/vbox" instance=ExtResource( 1 )]
+margin_top = 42.0
+margin_right = 539.0
+margin_bottom = 80.0
+fname = "สถานที่"
+
+[node name="vbox2" type="VBoxContainer" parent="hbox"]
+margin_left = 543.0
+margin_right = 1083.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="teachstart" parent="hbox/vbox2" instance=ExtResource( 1 )]
+margin_right = 540.0
+margin_bottom = 24.0
+fname = "เริ่มเวลา"
+vectorclock = Vector2( 8, 0 )
+is_vector = true
+
+[node name="teachend" parent="hbox/vbox2" instance=ExtResource( 1 )]
+margin_top = 28.0
+margin_right = 540.0
+margin_bottom = 52.0
+fname = "เลิกเวลา"
+vectorclock = Vector2( 9, 0 )
+is_vector = true
+
+[node name="teachday" parent="hbox/vbox2" instance=ExtResource( 1 )]
+margin_top = 56.0
+margin_right = 540.0
+margin_bottom = 80.0
+fname = "วัน"
+is_day = true
+
+[node name="vbox3" type="VBoxContainer" parent="hbox"]
+margin_left = 1087.0
+margin_right = 1280.0
+margin_bottom = 80.0
+
+[node name="section" parent="hbox/vbox3" instance=ExtResource( 1 )]
+margin_right = 193.0
+margin_bottom = 38.0
+fname = "Section"
+
+[node name="tag" parent="hbox/vbox3" instance=ExtResource( 1 )]
+margin_top = 42.0
+margin_right = 193.0
+margin_bottom = 80.0
+fname = "แท็ก"
+hint = "ท/ป"
+
+[connection signal="block_clicked" from="scroll/table" to="." method="_on_table_block_clicked"]
+[connection signal="blocks_updated" from="scroll/table" to="." method="_on_table_blocks_updated"]
+[connection signal="pressed" from="hbox2/add_block" to="." method="_on_add_block_pressed"]
+[connection signal="pressed" from="hbox2/delete_block" to="." method="_on_delete_block_pressed"]
+[connection signal="pressed" from="hbox2/update_field" to="." method="_on_update_field_pressed"]

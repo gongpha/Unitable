@@ -25,6 +25,9 @@ func kmitl_block(
 	return b
 
 func _on_import_pressed() :
+	if code.text.empty() :
+		return
+		
 	var res = JSON.parse(code.text)
 	if res.error != OK :
 		return
@@ -37,7 +40,7 @@ func _on_import_pressed() :
 		match 'KMITL' :
 			'KMITL' :
 				var bdata : Dictionary
-				var title : String = s.get('subject_tname', "ไม่ทราบ")
+				bdata.subject_name = s.get('subject_tname', "ไม่ทราบ")
 				
 				var regex := RegEx.new()
 				var err := regex.compile('^([0-1]?[0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])?$')
@@ -62,7 +65,7 @@ func _on_import_pressed() :
 				
 				bdata = kmitl_block(ts, te, day, s)
 				
-				block_nodes.append(new_block(title, bdata))
+				block_nodes.append(new_block(bdata))
 				
 				############################################################
 				
@@ -82,14 +85,14 @@ func _on_import_pressed() :
 						te = Vector2(int(rgr.strings[4]), int(rgr.strings[5]))
 						
 						bdata.tag = s.get('lect_or_prac', '')
-						block_nodes.append(new_block(title, bdata))
+						block_nodes.append(new_block(bdata))
 						
 				bdata = kmitl_block(ts, te, day, s)
-				block_nodes.append(new_block(title, bdata))
+				block_nodes.append(new_block(bdata))
 	
 	emit_signal('add_blocks', block_nodes)
 	
-func new_block(sname : String, dict : Dictionary) -> BlockSubject :
+func new_block(dict : Dictionary) -> BlockSubject :
 	var b : BlockSubject = BLOCK.instance()
-	b.setup(sname, dict)
+	b.setup(dict)
 	return b
